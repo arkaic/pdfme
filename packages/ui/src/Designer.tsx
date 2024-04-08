@@ -47,6 +47,10 @@ class Designer extends BaseUIClass {
   public onChangeTemplate(cb: (template: Template) => void) {
     this.onChangeTemplateCallback = cb;
   }
+  
+  public getPageCursor() {
+    return this.pageCursor
+  }
 
   public getPageCursor() {
     return this.pageCursor

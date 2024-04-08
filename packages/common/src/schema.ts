@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const langs = ['en', 'ja', 'ar', 'th', 'it', 'pl', 'de'] as const;
+const langs = ['en', 'ja', 'ar', 'th', 'pl', 'it', 'de', 'es'] as const;
 
 export const Lang = z.enum(langs);
 export const Dict = z.object({
@@ -19,7 +19,6 @@ export const Dict = z.object({
   notUniq: z.string(),
   noKeyName: z.string(),
   fieldsList: z.string(),
-  addNewField: z.string(),
   editField: z.string(),
   type: z.string(),
   errorOccurred: z.string(),
@@ -76,6 +75,7 @@ export const Size = z.object({ height: z.number(), width: z.number() });
 export const Schema = z
   .object({
     type: z.string(),
+    icon: z.string().optional(),
     content: z.string().optional(),
     position: z.object({ x: z.number(), y: z.number() }),
     width: z.number(),
