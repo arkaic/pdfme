@@ -52,10 +52,6 @@ class Designer extends BaseUIClass {
     return this.pageCursor
   }
 
-  public getPageCursor() {
-    return this.pageCursor
-  }
-
   protected render() {
     if (!this.domContainer) throw Error(DESTROYED_ERR_MSG);
     ReactDOM.render(
