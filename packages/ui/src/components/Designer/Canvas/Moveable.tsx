@@ -7,6 +7,7 @@ type Props = {
   bounds: { left: number; top: number; bottom: number; right: number };
   horizontalGuidelines: number[];
   verticalGuidelines: number[];
+  elementGuidelines: string[];
   keepRatio: boolean;
   rotatable: boolean;
   onDrag: ({ target, left, top }: OnDrag) => void;
@@ -56,6 +57,8 @@ const _Moveable = (props: Props, ref: Ref<any>) => {
       bounds={props.bounds}
       horizontalGuidelines={props.horizontalGuidelines}
       verticalGuidelines={props.verticalGuidelines}
+      snapThreshold={10}
+      elementGuidelines={props.elementGuidelines}
       keepRatio={props.keepRatio}
       onRotate={props.onRotate}
       onRotateEnd={props.onRotateEnd}
