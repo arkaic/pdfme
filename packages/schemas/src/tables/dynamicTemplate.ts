@@ -79,3 +79,35 @@ export const getDynamicHeightForTable = async (
   const table = await createSingleTable(body, args);
   return table.getHeight();
 };
+
+export const getDynamicDimensionsForTable = async (
+  value: string,
+  args: {
+    schema: Schema;
+    basePdf: BasePdf;
+    options: CommonOptions;
+    _cache: Map<any, any>;
+  }
+): Promise<{height: number
+  headHeight: number
+  bodyHeight: number
+  width: number}> => {
+  if (args.schema.type !== 'table') {
+    return Promise.resolve({
+      height: -1,
+      headHeight: -1,
+      bodyHeight: -1,
+      width: -1
+    })
+  }
+  const schema = args.schema as TableSchema;
+  const body =
+    schema.__bodyRange?.start === 0 ? getBody(value) : getBodyWithRange(value, schema.__bodyRange);
+  const table = await createSingleTable(body, args);
+  return {
+    height: table.getHeight(),
+    headHeight: table.getHeadHeight(),
+    bodyHeight: table.getBodyHeight(),
+    width: table.getWidth(),
+  }
+};
