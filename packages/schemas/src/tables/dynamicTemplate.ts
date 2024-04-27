@@ -13,7 +13,7 @@ export const modifyTemplateForTable = async (arg: {
   const template: Template = Object.assign(cloneDeep(t), { schemas: [] });
   let pageIndex = 0;
   for (const schemaObj of t.schemas) {
-    const additionalSchemaObjs: (typeof schemaObj)[] = [];
+    const additionalSchemaObjs: (typeof schemaObj)[] = [];  // additional pages
     for (const [key, schema] of Object.entries(schemaObj)) {
       if (schema.type === 'table') {
         schema.__bodyRange = undefined;
@@ -29,6 +29,8 @@ export const modifyTemplateForTable = async (arg: {
           schema.__bodyRange = { start: 0, end: firstTable.body.length };
           const allBodies = tables.map((table) => table.body);
           const from2ndTable = tables.slice(1);
+
+          // handle the extra tables created from this one table schema when overflow
           from2ndTable.forEach((table, i) => {
             const additionalPageIndex = pageIndex + i + 1;
 
@@ -37,7 +39,7 @@ export const modifyTemplateForTable = async (arg: {
                 ...schema,
                 position: { x: schema.position.x, y: table.settings.startY },
                 height: table.getHeight(),
-                showHead: false,
+                showHead: table.settings.showHead,  // hlin: use the setting instead of hardcode
                 __bodyRange: {
                   start: allBodies.slice(0, i + 1).reduce((acc, cur) => acc + cur.length, 0),
                   end: allBodies.slice(0, i + 2).reduce((acc, cur) => acc + cur.length, 0),
@@ -50,7 +52,7 @@ export const modifyTemplateForTable = async (arg: {
         }
       }
     }
-    template.schemas.push(schemaObj);
+    template.schemas.push(schemaObj);  // add the page to new template
     additionalSchemaObjs.forEach((obj, index) => {
       if (!template.schemas[index]) {
         template.schemas[index] = obj;

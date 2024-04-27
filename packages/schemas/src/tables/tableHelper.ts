@@ -172,6 +172,7 @@ function createTableWithAvailableHeight(
   let limit = availableHeight;
   const newTableBody: string[][] = [];
   let index = 0;
+  // create new table and add each row till limit is reached
   while (limit > 0 && index < tableBody.length) {
     const row = tableBody.slice(0, index + 1).pop();
     if (!row) break;
@@ -310,10 +311,12 @@ export async function createMultiTables(body: string[][], args: CreateTableArgs)
 
     if (remainingBody.length > 0) {
       const _schema = cloneDeep(schema);
-      _schema.showHead = false;
+      // hlin my change: want to show column names of subsequent tables from overflowing to next page
+      _schema.showHead = true;
       _schema.position.y = paddingTop;
       args.schema = _schema;
 
+      // new page
       availableHeight = pageHeight - paddingTop - paddingBottom;
     }
   }
