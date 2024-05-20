@@ -12,7 +12,7 @@ import {
 } from '@pdfme/common';
 import { DndContext } from '@dnd-kit/core';
 import RightSidebar from './RightSidebar/index';
-import LeftSidebar from './LeftSidebar';
+// import LeftSidebar from './LeftSidebar';
 import Canvas from './Canvas/index';
 import { RULER_HEIGHT, RIGHT_SIDEBAR_WIDTH } from '../../constants';
 import { I18nContext, PluginsRegistry } from '../../contexts';
@@ -273,11 +273,11 @@ const TemplateEditor = ({
           setZoomLevel={setZoomLevel}
           {...pageManipulation}
         />
-        <LeftSidebar
+        {/* <LeftSidebar
           height={canvasRef.current ? canvasRef.current.clientHeight : 0}
           scale={scale}
           basePdf={template.basePdf}
-        />
+        /> */}
 
         <RightSidebar
           hoveringSchemaId={hoveringSchemaId}
