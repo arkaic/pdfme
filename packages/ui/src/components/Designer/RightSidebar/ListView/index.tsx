@@ -34,30 +34,30 @@ const ListView = (
   } = props;
   const { token } = theme.useToken();
   const i18n = useContext(I18nContext);
-  const [isBulkUpdateFieldNamesMode, setIsBulkUpdateFieldNamesMode] = useState(false);
+  // const [isBulkUpdateFieldNamesMode, setIsBulkUpdateFieldNamesMode] = useState(false);
   const [fieldNamesValue, setFieldNamesValue] = useState('');
   const height = getSidebarContentHeight(size.height);
 
-  const commitBulk = () => {
-    const names = fieldNamesValue.split('\n');
-    if (names.length !== schemas.length) {
-      alert(i18n('errorBulkUpdateFieldName'));
-    } else {
-      changeSchemas(
-        names.map((value, index) => ({
-          key: 'key',
-          value,
-          schemaId: schemas[index].id,
-        }))
-      );
-      setIsBulkUpdateFieldNamesMode(false);
-    }
-  };
+  // const commitBulk = () => {
+  //   const names = fieldNamesValue.split('\n');
+  //   if (names.length !== schemas.length) {
+  //     alert(i18n('errorBulkUpdateFieldName'));
+  //   } else {
+  //     changeSchemas(
+  //       names.map((value, index) => ({
+  //         key: 'key',
+  //         value,
+  //         schemaId: schemas[index].id,
+  //       }))
+  //     );
+  //     setIsBulkUpdateFieldNamesMode(false);
+  //   }
+  // };
 
-  const startBulk = () => {
-    setFieldNamesValue(schemas.map((s) => s.key).join('\n'));
-    setIsBulkUpdateFieldNamesMode(true);
-  };
+  // const startBulk = () => {
+  //   setFieldNamesValue(schemas.map((s) => s.key).join('\n'));
+  //   setIsBulkUpdateFieldNamesMode(true);
+  // };
 
   return (
     <div>
@@ -68,7 +68,7 @@ const ListView = (
       </div>
       <Divider style={{ marginTop: token.marginXS, marginBottom: token.marginXS }} />
       <div style={{ height: height - headHeight }}>
-        {isBulkUpdateFieldNamesMode ? (
+        {/* {isBulkUpdateFieldNamesMode ? (
           <TextArea
             wrap="off"
             value={fieldNamesValue}
@@ -88,8 +88,18 @@ const ListView = (
             onSortEnd={onSortEnd}
             onEdit={onEdit}
           />
-        )}
-        <div style={{ paddingTop: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+        )} */}
+
+
+        <SelectableSortableContainer
+          schemas={schemas}
+          hoveringSchemaId={hoveringSchemaId}
+          onChangeHoveringSchemaId={onChangeHoveringSchemaId}
+          onSortEnd={onSortEnd}
+          onEdit={onEdit}
+        />
+
+        {/* <div style={{ paddingTop: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
           {isBulkUpdateFieldNamesMode ? (
             <>
               <Button size="small" type="text" onClick={commitBulk}>
@@ -105,7 +115,7 @@ const ListView = (
               <u> {i18n('bulkUpdateFieldName')}</u>
             </Button>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

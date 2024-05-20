@@ -119,8 +119,9 @@ Check this document: https://pdfme.com/docs/custom-schemas`);
         props: { options: typeOptions },
         required: true,
         span: 10,
+        disabled: true
       },
-      key: { title: i18n('fieldName'), type: 'string', required: true, span: 14 },
+      key: { title: i18n('fieldName'), type: 'string', required: true, span: 14, disabled: true },
       '-': { type: 'void', widget: 'Divider' },
       align: { title: i18n('align'), type: 'void', widget: 'AlignWidget' },
       x: { title: 'X', type: 'number', widget: 'inputNumber', required: true, span: 8, min: 0 },
