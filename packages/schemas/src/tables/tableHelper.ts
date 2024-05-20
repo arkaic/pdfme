@@ -298,6 +298,7 @@ export async function createMultiTables(body: string[][], args: CreateTableArgs)
   const tables: Table[] = [];
 
   while (remainingBody.length > 0) {
+    console.debug("createMultiTablesLoop")
     const tableHeight =
       tables.length === 0
         ? availableHeight - testTable.getHeadHeight()
