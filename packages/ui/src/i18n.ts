@@ -15,8 +15,8 @@ const dictEn: { [key in keyof Dict]: string } = {
   fieldMustUniq: 'Name of field is not unique',
   notUniq: '(Not unique name)',
   noKeyName: 'No name',
-  fieldsList: 'Field List',
-  editField: 'Edit Field',
+  fieldsList: 'Group List',
+  editField: 'Edit Group',
   type: 'Type',
   errorOccurred: 'An error occurred',
   errorBulkUpdateFieldName:
